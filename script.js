@@ -71,3 +71,18 @@ function handleSize(e) {
   size = e.target.value;
   generateQRCode();
 }
+
+function resolveDataUrl() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const img = document.querySelector("#qr-code img");
+      if (img.currentSrc) {
+        resolve(img.currentSrc);
+        return;
+      }
+      const canvas = document.querySelector("canvas");
+      resolve(canvas.toDataURL());
+    }, 50);
+  });
+}
+generateQRCode();
