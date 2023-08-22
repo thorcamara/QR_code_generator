@@ -17,3 +17,22 @@ let colorLight = "#fff",
   colorDark = "#000",
   text = defaultUrl,
   size = 300;
+
+function handleDarkColor(e) {
+  colorDark = e.target.value;
+  generateQRCode();
+}
+
+function handleLightColor(e) {
+  colorLight = e.target.value;
+  generateQRCode();
+}
+
+function handleQRText(e) {
+  const value = e.target.value;
+  text = value;
+  if (!value) {
+    text = defaultUrl;
+  }
+  generateQRCode();
+}
