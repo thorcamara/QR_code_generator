@@ -105,3 +105,8 @@ a {
 .share-btn {
   margin-left: 0.7rem;
 }
+
+.action-container {
+  display: flex;
+  margin: 1rem 0;
+}
