@@ -36,3 +36,38 @@ function handleQRText(e) {
   }
   generateQRCode();
 }
+
+async function generateQRCode() {
+  qrContainer.innerHTML = "";
+  new QRCode("qr-code", {
+    text,
+    height: size,
+    width: size,
+    colorLight,
+    colorDark,
+  });
+  download.href = await resolveDataUrl();
+}
+
+async function handleShare() {
+  setTimeout(async () => {
+    try {
+      const base64url = await resolveDataUrl();
+      const blob = await (await fetch(base64url)).blob();
+      const file = new File([blob], "QRCode.png", {
+        type: blob.type,
+      });
+      await navigator.share({
+        files: [file],
+        title: text,
+      });
+    } catch (error) {
+      alert("Your browser doesn't support sharing.");
+    }
+  }, 100);
+}
+
+function handleSize(e) {
+  size = e.target.value;
+  generateQRCode();
+}
